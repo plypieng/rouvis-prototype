@@ -23,7 +23,7 @@ export function WeatherForecast() {
   useEffect(() => {
     const fetchWeatherForecast = async () => {
       try {
-        const response = await fetch('https://localfarm-backend.vercel.app/api/weather');
+        const response = await fetch('/api/weather');
         const data = await response.json();
 
         // Transform API data to component format

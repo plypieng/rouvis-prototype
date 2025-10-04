@@ -52,8 +52,8 @@ export function WebChatInterface() {
     setIsLoading(true);
     
     try {
-      // Call the backend API
-      const response = await fetch('https://localfarm-backend.vercel.app/api/chat', {
+      // Call the local API proxy
+      const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
