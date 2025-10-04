@@ -58,7 +58,7 @@ export function WebChatInterface() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           message: userMessage.content,
-          history: messages.slice(-10).map(m => ({ role: m.sender, content: m.content })) // Send last 10 messages for context
+          history: messages.slice(0, -1).slice(-10).map(m => ({ role: m.sender === 'ai' ? 'assistant' : m.sender, content: m.content })) // Send last 10 messages for context, excluding current user message
         }),
       });
 
