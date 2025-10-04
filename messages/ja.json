@@ -1,0 +1,14 @@
+{
+  "app_name": "LocalFarm AI",
+  "strategic_planning": "農業戦略計画",
+  "farmer": "農家",
+  "niigata_japan": "新潟、日本",
+  "navigation": {
+    "dashboard": "ダッシュボード",
+    "planner": "畑プランナー",
+    "calendar": "カレンダー",
+    "analytics": "分析",
+    "community": "コミュニティ",
+    "chat": "AIチャット"
+  }
+}

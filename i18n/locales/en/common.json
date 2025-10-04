@@ -1,0 +1,197 @@
+{
+  "app_name": "LocalFarm AI",
+  "strategic_planning": "Strategic Farm Planning",
+  "farmer": "Farmer",
+  "niigata_japan": "Niigata, Japan",
+  "navigation": {
+    "dashboard": "Dashboard",
+    "planner": "Crop Planner",
+    "calendar": "Calendar",
+    "analytics": "Analytics",
+    "community": "Knowledge Base",
+    "chat": "AI Assistant"
+  },
+  "dashboard": {
+    "title": "Farm Dashboard",
+    "weather_forecast": "Weather Forecast",
+    "upcoming_activities": "Upcoming Activities",
+    "farm_metrics": "Farm Metrics",
+    "crop_recommendations": "AI Crop Recommendations",
+    "yield_forecast": "Yield Forecast",
+    "profit_analysis": "Profit Analysis",
+    "view_details": "View Details",
+    "location": "Niigata, Japan",
+    "five_day_forecast": "5-day forecast",
+    "rain_chance": "{percentage}% chance of rain",
+    "no_rain": "No rain expected",
+    "view_detailed_forecast": "View detailed forecast"
+  },
+  "planner": {
+    "title": "Crop Layout Planner",
+    "interactive_map": "Interactive Field Map",
+    "select_crops": "Select Crops",
+    "optimization_settings": "Optimization Settings",
+    "generate_plan": "Generate Plan",
+    "save_plan": "Save Plan",
+    "reset": "Reset",
+    "area": "Area",
+    "soil_type": "Soil Type",
+    "sunlight": "Sunlight Exposure",
+    "satellite_view": "Satellite View",
+    "soil_analysis": "Soil Analysis",
+    "terrain": "Terrain",
+    "add_plot": "Add Plot",
+    "draw_area": "Draw Area",
+    "map_instructions": "Map Instructions",
+    "map_instructions_text": "Drag boundaries to adjust plot sizes. Click on a plot to select it and view/edit crop assignments.",
+    "crop_names": {
+      "rice_field_a": "Rice Field A",
+      "vegetable_garden": "Vegetable Garden",
+      "rice_field_b": "Rice Field B"
+    }
+  },
+  "calendar": {
+    "title": "Crop Calendar",
+    "monthly_view": "Monthly Calendar View",
+    "upcoming_tasks": "Upcoming Tasks",
+    "add_event": "Add Event",
+    "event_type": "Event Type",
+    "planting": "Planting",
+    "harvesting": "Harvesting",
+    "fertilizing": "Fertilizing",
+    "watering": "Watering",
+    "maintenance": "Maintenance",
+    "view_full_calendar": "View full calendar",
+    "today": "Today",
+    "month": "Month",
+    "week": "Week"
+  },
+  "activities": {
+    "rice_field_irrigation": "Rice Field Irrigation",
+    "apply_organic_fertilizer": "Apply Organic Fertilizer",
+    "harvest_early_vegetables": "Harvest Early Vegetables",
+    "equipment_maintenance": "Equipment Maintenance",
+    "tomorrow": "Tomorrow"
+  },
+  "activity_types": {
+    "watering": "Watering",
+    "fertilizing": "Fertilizing",
+    "harvesting": "Harvesting",
+    "planting": "Planting",
+    "maintenance": "Maintenance"
+  },
+  "locations": {
+    "north_field": "North Field",
+    "vegetable_garden": "Vegetable Garden",
+    "east_plot": "East Plot",
+    "workshop": "Workshop"
+  },
+  "priorities": {
+    "high": "High",
+    "medium": "Medium",
+    "low": "Low"
+  },
+  "seasons": {
+    "spring": "Spring",
+    "summer": "Summer",
+    "fall": "Fall",
+    "winter": "Winter"
+  },
+  "crops": {
+    "match": "match",
+    "planting_window": "Planting Window",
+    "potential_yield": "Potential Yield",
+    "add_to_planning": "Add to planning"
+  },
+  "analytics": {
+    "title": "Farm Analytics",
+    "filter_by": "Filter By",
+    "date_range": "Date Range",
+    "crop_type": "Crop Type",
+    "season": "Season",
+    "annual": "Annual",
+    "seasonal": "Seasonal",
+    "compare": "Compare",
+    "yield_comparison": "Yield Comparison",
+    "cost_revenue": "Cost vs Revenue",
+    "detailed_metrics": "Detailed Metrics",
+    "export_data": "Export Data",
+    "yield_in_tons": "Yield in tons/hectare",
+    "avg_yield": "Avg. Yield",
+    "climate_influence": "Climate data influences crop performance",
+    "current_year_data": "2025 Data",
+    "temperature_c": "Temperature (°C)",
+    "rainfall_mm": "Rainfall (mm)",
+    "humidity_percent": "Humidity (%)"
+  },
+  "metrics": {
+    "crop_yield": "Crop Yield",
+    "profit_margin": "Profit Margin",
+    "current_year": "Current Year",
+    "rice_kg": "Rice (kg)",
+    "vegetables_kg": "Vegetables (kg)",
+    "fruits_kg": "Fruits (kg)",
+    "revenue_yen": "Revenue (¥)",
+    "expenses_yen": "Expenses (¥)",
+    "profit_yen": "Profit (¥)"
+  },
+  "community": {
+    "title": "Knowledge Base",
+    "search": "Search Articles",
+    "featured": "Featured Articles",
+    "categories": "Categories",
+    "recent": "Recent Articles",
+    "recent_articles": "Recent Articles",
+    "read_more": "Read More",
+    "all": "All",
+    "read": "read",
+    "load_more": "Load More Articles",
+    "category": {
+      "rice": "Rice",
+      "vegetables": "Vegetables",
+      "fruits": "Fruits",
+      "soil": "Soil",
+      "equipment": "Equipment",
+      "climate": "Climate"
+    }
+  },
+  "chat": {
+    "title": "AI Assistant",
+    "ai_assistant": "Farm AI Assistant",
+    "placeholder": "Ask farming question...",
+    "send": "Send",
+    "clear": "Clear Chat",
+    "suggested_topics": "Suggested Topics"
+  },
+  "weather": {
+    "today": "Today",
+    "mon": "Mon",
+    "tue": "Tue",
+    "wed": "Wed",
+    "thu": "Thu",
+    "fri": "Fri",
+    "sat": "Sat",
+    "sun": "Sun",
+    "partly_cloudy": "Partly Cloudy",
+    "sunny": "Sunny",
+    "rain": "Rain",
+    "heavy_rain": "Heavy Rain",
+    "cloudy": "Cloudy"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred.",
+    "try_again": "Try Again",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "language": "Language",
+    "english": "English",
+    "japanese": "Japanese",
+    "dark_mode": "Dark Mode",
+    "light_mode": "Light Mode",
+    "export_data": "Export Data",
+    "new_analysis": "New Analysis"
+  }
+}
