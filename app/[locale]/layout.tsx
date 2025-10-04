@@ -14,15 +14,14 @@ export function generateStaticParams() {
 }
 
 // Layout component following Next.js 15 requirements for dynamic params
-export default async function RootLayout(props: { 
-  children: React.ReactNode; 
-  params: { locale: string };
+export default async function RootLayout(props: {
+  children: React.ReactNode;
+  params: Promise<{ locale: string }>;
 }) {
-  // In Next.js 15.3.2, we need to separate the props extraction to avoid
-  // the "params should be awaited" error
+  // In Next.js 15, params are async and need to be awaited
   const { children } = props;
-  const params = await Promise.resolve(props.params);
-  const locale = await params.locale;
+  const params = await props.params;
+  const locale = params.locale;
   
   if (!locales.includes(locale)) {
     notFound();
