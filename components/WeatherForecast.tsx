@@ -21,59 +21,50 @@ export function WeatherForecast() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // In a real app, this would fetch from your backend API
     const fetchWeatherForecast = async () => {
       try {
-        // Mock API call for demonstration
-        // const response = await fetch('/api/weather');
-        // const data = await response.json();
-        
-        // Mock data for demo
-        setTimeout(() => {
-          setForecast([
-            {
-              date: '2025-05-18',
-              day: t('weather.today'),
-              temperature: { min: 18, max: 24 },
-              condition: t('weather.partly_cloudy'),
-              icon: '⛅',
-              precipitation: 10,
-            },
-            {
-              date: '2025-05-19',
-              day: t('weather.mon'),
-              temperature: { min: 17, max: 23 },
-              condition: t('weather.sunny'),
-              icon: '☀️',
-              precipitation: 0,
-            },
-            {
-              date: '2025-05-20',
-              day: t('weather.tue'),
-              temperature: { min: 16, max: 21 },
-              condition: t('weather.rain'),
-              icon: '🌧️',
-              precipitation: 60,
-            },
-            {
-              date: '2025-05-21',
-              day: t('weather.wed'),
-              temperature: { min: 15, max: 20 },
-              condition: t('weather.heavy_rain'),
-              icon: '⛈️',
-              precipitation: 80,
-            },
-            {
-              date: '2025-05-22',
-              day: t('weather.thu'),
-              temperature: { min: 17, max: 22 },
-              condition: t('weather.cloudy'),
-              icon: '☁️',
-              precipitation: 20,
-            },
-          ]);
-          setLoading(false);
-        }, 500);
+        const response = await fetch('https://localfarm-backend.vercel.app/api/weather');
+        const data = await response.json();
+
+        // Transform API data to component format
+        const transformedForecast: ForecastDay[] = data.forecast.map((day: any, index: number) => {
+          const date = new Date(day.date);
+          const dayNames = [t('weather.today'), t('weather.mon'), t('weather.tue'), t('weather.wed'), t('weather.thu'), t('weather.fri'), t('weather.sat'), t('weather.sun')];
+
+          // Map weather icons from API to emoji
+          const iconMap: Record<string, string> = {
+            '01d': '☀️', // clear sky day
+            '01n': '🌙', // clear sky night
+            '02d': '⛅', // few clouds day
+            '02n': '☁️', // few clouds night
+            '03d': '⛅', // scattered clouds
+            '03n': '☁️',
+            '04d': '☁️', // broken clouds
+            '04n': '☁️',
+            '09d': '🌧️', // shower rain
+            '09n': '🌧️',
+            '10d': '🌦️', // rain day
+            '10n': '🌧️', // rain night
+            '11d': '⛈️', // thunderstorm
+            '11n': '⛈️',
+            '13d': '❄️', // snow
+            '13n': '❄️',
+            '50d': '🌫️', // mist
+            '50n': '🌫️'
+          };
+
+          return {
+            date: day.date,
+            day: dayNames[index] || date.toLocaleDateString('en-US', { weekday: 'short' }),
+            temperature: day.temperature,
+            condition: day.condition,
+            icon: iconMap[day.icon] || '☀️',
+            precipitation: day.precipitation,
+          };
+        });
+
+        setForecast(transformedForecast);
+        setLoading(false);
       } catch (error) {
         console.error('Failed to fetch weather forecast', error);
         setLoading(false);
@@ -81,7 +72,7 @@ export function WeatherForecast() {
     };
 
     fetchWeatherForecast();
-  }, []);
+  }, [t]);
 
   if (loading) {
     return (

@@ -14,7 +14,7 @@ export function WebChatInterface() {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: '1',
-      content: 'こんにちは！新潟の農業AIアシスタントです。戦略的な農業計画についてどのようにお手伝いできますか？',
+      content: 'Hello! I\'m your farming assistant for Niigata. How can I help you with strategic farming planning?',
       sender: 'ai',
       timestamp: new Date(),
     },
@@ -52,88 +52,30 @@ export function WebChatInterface() {
     setIsLoading(true);
     
     try {
-      // In a real app, this would call your backend API
-      // const response = await fetch('/api/chat', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({ 
-      //     message: userMessage.content,
-      //     history: messages.map(m => ({ role: m.sender, content: m.content }))
-      //   }),
-      // });
-      // const data = await response.json();
-      
-      // Mock API response delay
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // Sample responses based on user input
-      let aiResponse = "";
-      
-      if (userMessage.content.toLowerCase().includes('rice') || (userMessage.attachments && userMessage.content === '')) {
-        aiResponse = `Based on the soil analysis and current climate patterns in Niigata, I recommend the following strategy for your rice cultivation:
+      // Call the backend API
+      const response = await fetch('https://localfarm-backend.vercel.app/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: userMessage.content,
+          history: messages.slice(-10).map(m => ({ role: m.sender, content: m.content })) // Send last 10 messages for context
+        }),
+      });
 
-1. **Variety Selection**: Koshihikari remains optimal for your soil pH (5.8-6.2), but consider allocating 15% of your fields to Hitomebore as a diversification strategy.
-
-2. **Planting Schedule**: Begin transplanting in the northern fields by May 25th, followed by southern fields by June 2nd to optimize the forecasted rainfall patterns.
-
-3. **Water Management**: Implement intermittent irrigation (3 days on, 2 days off) during the vegetative stage to reduce water usage by approximately 20% while maintaining yield.
-
-4. **Nutrient Management**: Your soil shows slight potassium deficiency. Apply 60kg/ha of potassium sulfate before flooding.
-
-Would you like me to create a detailed planting calendar for you with these recommendations?`;
-      } else if (userMessage.content.toLowerCase().includes('profit') || userMessage.content.toLowerCase().includes('market')) {
-        aiResponse = `Based on current market trends and your farm's production capacity, here's my strategic analysis:
-
-1. **Market Outlook**: Premium rice varieties from Niigata are projected to maintain a 5-7% price premium through 2025-2026 due to increased domestic demand for high-quality rice.
-
-2. **Profit Optimization**: 
-   - Direct-to-consumer sales through local co-ops could increase your margins by 12-15%
-   - Consider allocating 0.5 hectares to specialty rice varieties (Koshihikari Premium) which command a 20% higher market price
-   - Value-added products like rice flour could diversify revenue streams
-
-3. **Cost Reduction Opportunities**:
-   - Implementing the smart irrigation system we discussed could reduce water costs by 18%
-   - Bulk purchasing of fertilizers with neighboring farms could save approximately ¥45,000 annually
-
-Would you like me to prepare a detailed profit projection based on these strategies?`;
-      } else if (userMessage.content.toLowerCase().includes('weather') || userMessage.content.toLowerCase().includes('climate')) {
-        aiResponse = `Here's my climate-informed strategic advice for your Niigata farm:
-
-1. **Seasonal Forecast Analysis**: This year's climate models predict:
-   - Earlier than usual summer temperatures by approximately 8-10 days
-   - A 15% increase in heavy rainfall events during July-August
-   - Extended dry periods in late August
-
-2. **Recommended Adaptations**:
-   - Adjust planting schedules forward by 7-10 days
-   - Enhance field drainage systems before June 15th
-   - Implement water conservation measures for late summer
-   - Consider drought-tolerant rice varieties for 20% of your acreage
-
-3. **Long-term Climate Resilience**:
-   - Your south-facing slopes will experience increased heat stress - consider shade cloth systems
-   - Invest in improved water storage capacity of at least 15% over the next two seasons
-
-I can help you develop a detailed climate adaptation plan tailored to your specific field locations if you'd like.`;
-      } else {
-        aiResponse = `Thank you for your question about strategic farming in Niigata. To provide you with the most relevant guidance, I'd like to understand more about your specific situation:
-
-1. What crops are you currently growing or planning to grow?
-2. What aspects of farm planning are you most interested in optimizing? (e.g., yield, sustainability, profit margins, labor efficiency)
-3. How large is your farming operation?
-4. Do you have any specific challenges you're currently facing?
-
-With this information, I can provide more tailored strategic recommendations for your farm in Niigata. I can also analyze soil reports, satellite imagery, or historical yield data if you'd like to share those.`;
+      if (!response.ok) {
+        throw new Error(`API request failed: ${response.status}`);
       }
-      
+
+      const data = await response.json();
+
       // Add AI response to chat
       const aiMessage: ChatMessage = {
         id: (Date.now() + 1).toString(),
-        content: aiResponse,
+        content: data.response || 'Sorry, I couldn\'t generate a response. Please try again.',
         sender: 'ai',
-        timestamp: new Date(),
+        timestamp: new Date(data.timestamp || Date.now()),
       };
-      
+
       setMessages(prev => [...prev, aiMessage]);
     } catch (error) {
       console.error('Error sending message', error);
