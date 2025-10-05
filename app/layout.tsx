@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "LocalFarm AI - Strategic Planning",
+  title: "Rouvis - Strategic Planning",
   description: "Strategic farm planning and analytics for farmers in Niigata, Japan",
 };
 
