@@ -8,6 +8,7 @@ export function MapPlanner() {
   const t = useTranslations();
   const mapRef = useRef<HTMLDivElement>(null);
   const [mapLoaded, setMapLoaded] = useState(false);
+  const [mapError, setMapError] = useState<string | null>(null);
   const [activeLayer, setActiveLayer] = useState<'satellite' | 'soil' | 'terrain'>('satellite');
 
   useEffect(() => {
@@ -15,10 +16,16 @@ export function MapPlanner() {
     let mapInstance: google.maps.Map | null = null;
     const mapElements: (google.maps.Polygon | google.maps.Marker)[] = [];
     
-    // For demo purposes, we're not using an actual API key
-    // In a real application, you'd store this in environment variables
+    // Get API key from environment variables
+    const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
+
+    if (!apiKey) {
+      setMapError('Google Maps API key is not configured. Please add NEXT_PUBLIC_GOOGLE_MAPS_API_KEY to your environment variables.');
+      return;
+    }
+
     const loader = new Loader({
-      apiKey: 'GOOGLE_MAPS_API_KEY_PLACEHOLDER',
+      apiKey,
       version: 'weekly',
     });
 
@@ -107,8 +114,8 @@ export function MapPlanner() {
 
         setMapLoaded(true);
       } catch (e) {
-        // In a real app, we'd handle the error better
         console.error('Error loading Google Maps API:', e);
+        setMapError('Failed to load Google Maps. Please check your API key and internet connection.');
       }
     };
 
@@ -176,11 +183,18 @@ export function MapPlanner() {
         </div>
       </div>
       
-      <div 
-        ref={mapRef} 
+      <div
+        ref={mapRef}
         className="flex-1 rounded-lg border border-gray-200 w-full h-full bg-gray-100"
       >
-        {!mapLoaded && (
+        {mapError ? (
+          <div className="h-full flex items-center justify-center">
+            <div className="text-center p-4">
+              <div className="text-red-500 mb-2">⚠️</div>
+              <p className="text-sm text-gray-600">{mapError}</p>
+            </div>
+          </div>
+        ) : !mapLoaded && (
           <div className="h-full flex items-center justify-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
           </div>
